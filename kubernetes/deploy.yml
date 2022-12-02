@@ -19,4 +19,5 @@ spec:
       containers:
         - image: nginx
           name: nginx-theo
-          - containerPort: 80
+          ports:
+            - containerPort: 80
