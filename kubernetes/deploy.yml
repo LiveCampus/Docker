@@ -18,10 +18,13 @@ spec:
     spec:
       containers:
         - image: theolivecampus/apache
+          imagePullPolicy: IfNotPresent
           name: apache-theo
           ports:
             - containerPort: 80
         - image: theolivecampus/php
+          imagePullPolicy: IfNotPresent
           name: php-theo
         - image: theolivecampus/mariadb
+          imagePullPolicy: IfNotPresent
           name: mariadb-theo
