@@ -1,16 +1,17 @@
 <?php
-   
    $dbhost = 'mysql';
    $dbuser = 'root';
-   $dbpass = 'root';
-   $conn = mysql_connect($dbhost, $dbuser, $dbpass);
+   $dbpass = '123456';
+   $conn = new mysqli($dbhost, $dbuser, $dbpass);
    
-   if(! $conn ) {
-      die('Could not connect: ' . mysql_error());
+   if($conn->connect_error) {
+      die('Could not connect: ' . $conn->connect_error);
    }
    
-   echo 'Connected successfully';
-   
+   echo "Connected successfully<br/>";
+
+   $conn->select_db("test_db");
+
    $sql = 'CREATE TABLE employee( '.
       'emp_id INT NOT NULL AUTO_INCREMENT, '.
       'emp_name VARCHAR(20) NOT NULL, '.
@@ -18,14 +19,8 @@
       'emp_salary   INT NOT NULL, '.
       'join_date    timestamp(6) NOT NULL, '.
       'primary key ( emp_id ))';
-   mysql_select_db('test_db');
-   $retval = mysql_query( $sql, $conn );
-   
-   if(! $retval ) {
-      die('Could not create table: ' . mysql_error());
-   }
-   
-   echo "Table employee created successfully\n";
-   
-   mysql_close($conn);
+
+   $conn->query( $sql );
+
+   echo "Table employee created successfully<br/>";
 ?>

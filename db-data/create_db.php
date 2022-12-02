@@ -4,18 +4,14 @@
    $dbpass = '123456';
    $conn = new mysqli($dbhost, $dbuser, $dbpass);
    
-   if($conn->connect_error ) {
+   if($conn->connect_error) {
       die('Could not connect: ' . $conn->connect_error);
    }
    
-   echo "Connected successfully\n";
+   echo "Connected successfully<br/>";
    
    $sql = 'CREATE Database test_db';
-   $retval = $conn->query( $sql );
+   $conn->query( $sql );
    
-   echo  "Database test_db created successfully\n";
-
-   if(! $retval ) {
-      die('Could not create database: ' . $conn->error);
-   }
+   echo  "Database test_db created successfully<br/>";
 ?>

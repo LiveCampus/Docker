@@ -9,26 +9,24 @@
          if(isset($_POST['delete'])) {
             $dbhost = 'mysql';
             $dbuser = 'root';
-            $dbpass = 'root';
-            $conn = mysql_connect($dbhost, $dbuser, $dbpass);
-            
-            if(! $conn ) {
-               die('Could not connect: ' . mysql_error());
+            $dbpass = '123456';
+            $conn = new mysqli($dbhost, $dbuser, $dbpass);
+
+            if($conn->connect_error) {
+               die('Could not connect: ' . $conn->connect_error);
             }
+
+            echo "Connected successfully<br/>";
+
+            $conn->select_db("test_db");
 				
             $emp_id = $_POST['emp_id'];
             
             $sql = "DELETE FROM employee WHERE emp_id = $emp_id" ;
-            mysql_select_db('test_db');
-            $retval = mysql_query( $sql, $conn );
+
+            $conn->query( $sql );
             
-            if(! $retval ) {
-               die('Could not delete data: ' . mysql_error());
-            }
-            
-            echo "Deleted data successfully\n";
-            
-            mysql_close($conn);
+            echo "Deleted data successfully<br>";
          }else {
             ?>
                <form method = "post" action = "<?php $_PHP_SELF ?>">

@@ -9,36 +9,26 @@
          if(isset($_POST['add'])) {
             $dbhost = 'mysql';
             $dbuser = 'root';
-            $dbpass = 'root';
-            $conn = mysql_connect($dbhost, $dbuser, $dbpass);
+            $dbpass = '123456';
+            $conn = new mysqli($dbhost, $dbuser, $dbpass);
             
-            if(! $conn ) {
-               die('Could not connect: ' . mysql_error());
+            if($conn->connect_error) {
+               die('Could not connect: ' . $conn->connect_error);
             }
+
+            $conn->select_db("test_db");
             
-            if(! get_magic_quotes_gpc() ) {
-               $emp_name = addslashes ($_POST['emp_name']);
-               $emp_address = addslashes ($_POST['emp_address']);
-            }else {
-               $emp_name = $_POST['emp_name'];
-               $emp_address = $_POST['emp_address'];
-            }
+            $emp_name = $_POST['emp_name'];
+            $emp_address = $_POST['emp_address'];
             
             $emp_salary = $_POST['emp_salary'];
             
             $sql = "INSERT INTO employee ". "(emp_name,emp_address, emp_salary, 
                join_date) ". "VALUES('$emp_name','$emp_address',$emp_salary, NOW())";
                
-            mysql_select_db('test_db');
-            $retval = mysql_query( $sql, $conn );
+            $conn->query( $sql );
             
-            if(! $retval ) {
-               die('Could not enter data: ' . mysql_error());
-            }
-            
-            echo "Entered data successfully\n";
-            
-            mysql_close($conn);
+            echo "Entered data successfully<br/>";
          }else {
             ?>
             
