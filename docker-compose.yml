@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  apache:
+    build: ./apache/
+    container_name: exa_apache
+    networks:
+      - app
+    depends_on:
+      - mysql
+      - php
+    ports:
+      - 8000:80
+    volumes:
+      - ./db-data/:/var/www/html/
+  mysql:
+    build: ./mariadb/
+    container_name: exa_mysql
+    networks:
+      - app
+  php:
+    build: ./php/
+    container_name: exa_php
+    volumes:
+      - ./db-data/:/var/www/html/
+    networks:
+      - app
+
+networks:
+  app:

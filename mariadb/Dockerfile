@@ -1,0 +1,7 @@
+FROM mariadb:latest
+
+ENV MARIADB_ROOT_PASSWORD 123456
+
+EXPOSE 3306
+
+CMD ["mysqld"]
