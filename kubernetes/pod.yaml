@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  namespace: theo-examen
+  labels:
+    app: web
+    version: '2'
+spec:
+  containers:
+    - image: nginx
+      name: nginx-theo
