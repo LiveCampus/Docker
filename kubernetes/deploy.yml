@@ -4,7 +4,7 @@ metadata:
   labels:
     app: web
     version: '2'
-  name: nginx
+  name: theo-examen
   namespace: theo-examen
 spec:
   replicas: 3
@@ -17,7 +17,11 @@ spec:
         app: web
     spec:
       containers:
-        - image: nginx
-          name: nginx-theo
+        - image: theolivecampus/apache
+          name: apache-theo
           ports:
             - containerPort: 80
+        - image: theolivecampus/php
+          name: php-theo
+        - image: theolivecampus/mariadb
+          name: mariadb-theo
